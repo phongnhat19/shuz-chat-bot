@@ -15,19 +15,23 @@ bot.handleMessage = (sender_psid, received_message) => {
                 "payload": {
                     "template_type": "generic",
                     "elements": [{
-                        "title": "You want to chat with the bot or the person?",
-                        "subtitle": "Tap a button to answer.",
+                        "title": "Shuz shop xin chào, bạn cần gì ?",
                         "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Bot!",
-                            "payload": "bot",
-                        },
-                        {
-                            "type": "postback",
-                            "title": "Person!",
-                            "payload": "person",
-                        }
+                            {
+                                "type": "postback",
+                                "title": "Mua hàng",
+                                "payload": "buy",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Tư vấn",
+                                "payload": "consult",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Khác",
+                                "payload": "other",
+                            }
                         ],
                     }]
                 }
@@ -46,10 +50,12 @@ bot.handlePostback = (sender_psid, received_postback) => {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload === 'bot') {
-        response = { "text": "Jarvis the Bot!" }
-    } else if (payload === 'person') {
-        response = { "text": "Jarvis the Person" }
+    if (payload === 'buy') {
+        response = { "text": "Bạn cần mua gì ạ" }
+    } else if (payload === 'consult') {
+        response = { "text": "Bạn cần tư vấn về gì ạ" }
+    } else if (payload === 'other') {
+        response = { "text": "Hãy cho shuz biết bạn cần gì" }
     }
     // Send the message to acknowledge the postback
     bot.callSendAPI(sender_psid, response);
